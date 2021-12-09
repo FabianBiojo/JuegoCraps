@@ -14,7 +14,7 @@ package juegoCraps;
 public class ModelCraps {
     private Dado dado1, dado2;
     private int tiro, punto, estado, flag;
-    private String estadoToString;
+    private String[] estadoToString;
     private int[] caras;
 
     /**
@@ -25,6 +25,7 @@ public class ModelCraps {
         dado1 = new Dado();
         dado2 = new Dado();
         caras = new int[2];
+        estadoToString = new String[2];
         flag = 0;
     }
 
@@ -72,10 +73,13 @@ public class ModelCraps {
         if(tiro==punto){
             estado=4;
             flag=0;
-        }
-        if (tiro==7){
-            estado=5;
-            flag=0;
+        }else {
+            if(tiro==7){
+                estado=5;
+                flag=0;
+            }else{
+                estado=6;
+            }
         }
     }
 
@@ -91,21 +95,32 @@ public class ModelCraps {
      * Establish message game according to estado attribute value
      * @return Message for the view class
      */
-    public String getEstadoToString() {
+    public String[] getEstadoToString() {
         switch (estado){
-            case 1: estadoToString="Sacaste Natural, has ganado!!";
-                break;
-            case 2: estadoToString="Sacaste Craps, has perdido!!";
-                break;
-            case 3: estadoToString="Estableciste Punto en "+punto+
-                                   " Debes seguir lanzando!!"+
-                                   "\npero si sacas 7 antes que "+punto+
-                                   " perderas";
-                break;
-            case 4: estadoToString="Volviste a sacar "+punto+", has ganado!!";
-                break;
-            case 5: estadoToString="Sacaste 7 antes que "+punto+" has perdido!!";
-                break;
+            case 1: estadoToString[0]="Tiro de Salida = "+tiro;
+                    estadoToString[1]="Sacaste Natural, has ganado!!";
+                    break;
+            case 2: estadoToString[0]="Tiro de Salida = "+tiro;
+                    estadoToString[1]="Sacaste Craps, has perdido!!";
+                    break;
+            case 3: estadoToString[0]="Tiro de Salida = "+tiro+"\nPunto = "+punto;
+                    estadoToString[1]="Estableciste Punto en "+punto+
+                                      " Debes seguir lanzando!!"+
+                                      "\npero si sacas 7 antes que "+punto+" perderas";
+                    break;
+            case 4: estadoToString[0]="Tiro de Salida = "+punto+"\nPunto = "+punto+
+                                      "\nValor del buevo tiro = "+tiro;
+                    estadoToString[1]="Volviste a sacar "+punto+", has ganado!!";
+                    break;
+            case 5: estadoToString[0]="Tiro de Salida = "+punto+"\nPunto = "+punto+
+                                      "\nValor del nuevo tiro = "+tiro;
+                    estadoToString[1]="Sacaste 7 antes que "+punto+" has perdido!!";
+                    break;
+            case 6: estadoToString[0]="Tiro de Salida = "+punto+"\nPunto = "+punto+
+                                      "\nValor del nuevo tiro = "+tiro;
+                    estadoToString[1]="\nEstas en Punto y debes seguir lanzando!!"+
+                                      "\npero si sacas 7 antes que "+punto+" perderas";
+                    break;
         }
         return estadoToString;
     }
