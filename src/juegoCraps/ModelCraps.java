@@ -33,7 +33,7 @@ public class ModelCraps {
      */
     public void calcualrTiro(){
         caras[0] = dado1.getCara();
-        caras[2] = dado2.getCara();
+        caras[1] = dado2.getCara();
         tiro = caras[0] + caras[1];
     }
 
@@ -99,10 +99,10 @@ public class ModelCraps {
                 break;
             case 3: estadoToString="Estableciste Punto en "+punto+
                                    " Debes seguir lanzando!!"+
-                                   "\n pero si sacas 7 antes que"+punto+
+                                   "\npero si sacas 7 antes que "+punto+
                                    " perderas";
                 break;
-            case 4: estadoToString="Volviste a sacar"+punto+", has ganado!!";
+            case 4: estadoToString="Volviste a sacar "+punto+", has ganado!!";
                 break;
             case 5: estadoToString="Sacaste 7 antes que "+punto+" has perdido!!";
                 break;
